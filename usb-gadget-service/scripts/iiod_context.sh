@@ -38,7 +38,7 @@ elif [ -f "${DMI}" ] ; then
 	VENDOR=$(sanitize "${DMI}")
 fi
 
-SYSID=$(sanitize_str $(dmesg | grep axi_sysid | grep git | head -1 | cut -f2- -d":" | sed -e 's/^[[:space:]]*//' | sed -e 's/</[/g' -e 's/>/]/g'))
+SYSID=$(sanitize_str $(dmesg | grep axi_sysid | grep git | tail -1 | cut -f2- -d":" | sed -e 's/^[[:space:]]*//' | sed -e 's/</[/g' -e 's/>/]/g'))
 
 UNIQUE_ID=$(sanitize_str $(dmesg | grep SPI-NOR-UniqueID | head -1))
 UNIQUE_ID=${UNIQUE_ID#*SPI-NOR-UniqueID }
